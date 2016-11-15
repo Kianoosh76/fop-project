@@ -18,7 +18,8 @@ class Team(models.Model):
 
     def add_text(self):
         texts = Text.objects.count()
-        self.text = Text.objects.all()[randint(0, texts-1)]
+        if texts > 0:
+            self.text = Text.objects.all()[randint(0, texts-1)]
 
     def save(self, *args, **kwargs):
         if self.id is None:
