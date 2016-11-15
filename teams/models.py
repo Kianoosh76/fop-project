@@ -16,6 +16,10 @@ class Team(models.Model):
     def generate_password(self):
         return "_".join([str(member.student_id) for member in self.members.all()])
 
+    def add_text(self):
+        texts = Text.objects.count()
+        self.text = Text.objects.all()[randint(0, texts-1)]
+
     def save(self, *args, **kwargs):
         if self.id is None:
             count = Team.objects.last().pk
@@ -23,9 +27,7 @@ class Team(models.Model):
                                                  password='')
 
         if not self.text:
-            texts = Text.objects.count()
-            self.text = Text.objects.all()[randint(0, texts-1)]
-
+            self.add_text()
         super().save(*args, **kwargs)
 
     def __str__(self):
