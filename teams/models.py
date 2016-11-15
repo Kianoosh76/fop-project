@@ -13,10 +13,14 @@ class Team(models.Model):
     text = models.ForeignKey(to='phase0.Text', null=True, blank=True, related_name='teams',
                              on_delete=SET_NULL)
 
+    def generate_password(self):
+        return "_".join([str(member.student_id) for member in self.members.all()])
+
     def save(self, *args, **kwargs):
         if self.id is None:
-            count = Team.objects.count()
-            self.user = User.objects.create_user(username='team' + str(count+1), password='1234')
+            count = Team.objects.last().pk
+            self.user = User.objects.create_user(username='team' + str(count+1),
+                                                 password='')
 
         if not self.text:
             texts = Text.objects.count()
@@ -30,7 +34,7 @@ class Team(models.Model):
 
 class Member(models.Model):
     name = models.CharField(max_length=40)
-    student_id = models.IntegerField()
+    student_id = models.IntegerField(unique=True)
     team = models.ForeignKey(to='Team', null=False, related_name='members')
 
     def __str__(self):
