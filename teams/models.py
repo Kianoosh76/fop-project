@@ -22,7 +22,10 @@ class Team(models.Model):
 
     def save(self, *args, **kwargs):
         if self.id is None:
-            count = Team.objects.last().pk
+            count = 0
+            last_team = Team.objects.last()
+            if last_team:
+                count = last_team.pk
             self.user = User.objects.create_user(username='team' + str(count+1),
                                                  password='')
 
