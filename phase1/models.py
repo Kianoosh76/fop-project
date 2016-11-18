@@ -16,7 +16,7 @@ class News(models.Model):
     date = models.CharField(max_length=40)
     description = models.TextField(max_length=2000)
     categorized = models.BooleanField()
-    categories = models.ManyToManyField(to='Category', related_name='news', null=True, blank=True)
+    categories = models.ManyToManyField(to='Category', related_name='news', blank=True)
     team = models.ForeignKey(to='teams.Team', related_name='news')
 
     class Meta:
