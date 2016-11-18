@@ -9,3 +9,17 @@ class Phase0View(APIView):
 
     def get(self, request, *args, **kwargs):
         return HttpResponse(request.team.text)
+
+    def post(self, request, *args, **kwargs):
+        answer = request.data.get('answer')
+        member = request.data.get('member')
+        text = request.team.text
+
+        checklist = {'1': text.smallest_repeated_word, '2': text.distinct_longest_words}
+        if member in checklist:
+            if answer == checklist[member]:
+                return HttpResponse("Correct answer! You've completed your phase0 part! Congrats!")
+            else:
+                return HttpResponse("Wrong answer:( Keep trying...")
+        return HttpResponse("Invalid request data! Check you declared 'member' correctly"
+                            " in your request. It should be either '1' or '2' ")

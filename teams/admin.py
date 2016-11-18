@@ -23,12 +23,19 @@ class TeamAdmin(admin.ModelAdmin):
     inlines = [MemberInline, NewsInline]
     list_display = ['__str__', 'votes']
     actions = ['generate_password', 'add_text']
+    readonly_fields = ['answer1', 'answer2']
 
     def generate_password(self, request, queryset):
         for team in queryset:
             team.user.set_password(team.generate_password())
             team.user.save()
     generate_password.short_description = 'Generate password for selected teams'
+
+    def answer1(self, obj):
+        return obj.text.smallest_repeated_word
+
+    def answer2(self, obj):
+        return obj.text.distinct_longest_words
 
     def add_text(self, request, queryset):
         for team in queryset:
