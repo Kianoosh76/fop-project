@@ -67,3 +67,9 @@ class Vote(models.Model):
                 self.team.votes += 1
             self.team.save()
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        if self.valid:
+            return '{} VOTED TO {}'.format(str(self.member), str(self.team))
+        else:
+            return 'Invalid vote'
