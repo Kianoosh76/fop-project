@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User, Group
 
 from phase1.models import News
 from teams.models import Team, Member, Vote
@@ -34,5 +36,12 @@ class TeamAdmin(admin.ModelAdmin):
             team.save()
     add_text.short_description = 'Add/change phase 0 text for selected teams'
 
+
+class NewUserAdmin(UserAdmin):
+    list_display = UserAdmin.list_display + ('last_login',)
+
+admin.site.unregister(Group)
+admin.site.unregister(User)
+admin.site.register(User, NewUserAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(Vote)
