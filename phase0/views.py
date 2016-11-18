@@ -21,5 +21,5 @@ class Phase0View(APIView):
                 return HttpResponse("Correct answer! You've completed your phase0 part! Congrats!")
             else:
                 return HttpResponse("Wrong answer:( Keep trying...")
-        return HttpResponseBadRequest("Invalid request data! Check you declared 'member' correctly"
-                                      " in your request. It should be either '1' or '2' ")
+        return HttpResponseBadRequest("Invalid request data! Make sure you declared 'member' "
+                                      "correctly in your request. It should be either '1' or '2' ")
