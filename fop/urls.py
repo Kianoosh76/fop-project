@@ -16,9 +16,10 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from phase0.views import Phase0View
+from phase0.views import Phase0View, WelcomeView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^phase0/', Phase0View.as_view(), name='phase0'),
+    url(r'^welcome/', WelcomeView.as_view(), name='welcome'),
 ]
