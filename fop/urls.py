@@ -21,5 +21,6 @@ from phase0.views import Phase0View
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^phase0/', Phase0View.as_view(), name='phase0'),
+    url(r'^news/', include('phase1.urls'), name='phase1'),
     url(r'^', include('teams.urls', namespace='team'))
 ]
