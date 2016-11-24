@@ -22,8 +22,9 @@ class TeamAdmin(admin.ModelAdmin):
     model = Team
     inlines = [MemberInline, NewsInline]
     list_display = ['__str__', 'votes']
-    actions = ['generate_password', 'add_text']
-    readonly_fields = ['answer1', 'answer2']
+    actions = ['generate_password', 'add_text', 'assign_categorized_urls',
+               'assign_uncategorized_urls']
+    readonly_fields = ['answer1', 'answer2', 'categorized_urls', 'uncategorized_urls']
 
     def generate_password(self, request, queryset):
         for team in queryset:
@@ -42,6 +43,20 @@ class TeamAdmin(admin.ModelAdmin):
             team.add_text()
             team.save()
     add_text.short_description = 'Add/change phase 0 text for selected teams'
+
+    def assign_categorized_urls(self, request, queryset):
+        for team in queryset:
+            team.assign_categorized_urls()
+            team.save()
+    assign_categorized_urls.short_description = 'Assign categorized (phase 1) urls to' \
+                                                ' selected teams'
+
+    def assign_uncategorized_urls(self, request, queryset):
+        for team in queryset:
+            team.assign_uncategorized_urls()
+            team.save()
+    assign_uncategorized_urls.short_description = 'Assign uncategorized (phase 3) urls to ' \
+                                                  'selected teams'
 
 
 class NewUserAdmin(UserAdmin):
