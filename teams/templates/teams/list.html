@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>This is Fop Project!</h2>
+    <table title="teams">
+        <thead>
+        <th>Team name</th>
+        <th>Members</th>
+        </thead>
+        <tbody>
+        {% for team in teams %}
+        <tr>
+            <td>{{team.name}}</td>
+            {% for member in team.members.all %} <td>{{member.name}}</td> {% endfor %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

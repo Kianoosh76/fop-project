@@ -1,3 +1,4 @@
+from django.core.exceptions import PermissionDenied
 from rest_framework.permissions import BasePermission
 
 
@@ -8,3 +9,13 @@ class TeamPermission(BasePermission):
                 request.team = request.user.team
                 return True
         return False
+
+
+class PermissionCheckerMixin:
+    permission_classes = []
+
+    def dispatch(self, request, *args, **kwargs):
+        for permission_class in self.permission_classes:
+            if not permission_class().has_permission(request, None):
+                raise PermissionDenied("You do not have permission for this action")
+        return super().dispatch(request, *args, **kwargs)
