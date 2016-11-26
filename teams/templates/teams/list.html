@@ -16,9 +16,11 @@
                 <tr>
                     <th>Team name</th>
                     <th>Members</th>
+                                        <th>Votes</th>
+
                     <th>
                     {% if request.user.team %}
-                        Who are you for voting?
+                        Who are you?<br>
                         <select id="members">
                             {% for member in request.user.team.members.all %}
                             <option value="{{member.student_id}}">{{member.name}}</option>
@@ -28,13 +30,12 @@
                         Please login your team to like/dislike
                     {% endif%}
                     </th>
-                    <th>Votes</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for team in teams %}
                     <tr>
-                        <td>{{ team.name }}</td>
+                        <td><strong>{{ team.name }}</strong></td>
                         <input type="hidden" id="team-{{forloop.counter}}" value="{{team.username}}">
                         {% with team.members.count as count %}
                             {% for member in team.members.all %}
