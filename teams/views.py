@@ -27,9 +27,8 @@ class LikeView(APIView):
     permission_classes = [AjaxPermission, TeamPermission]
 
     def post(self, request, *args, **kwargs):
-        member = get_object_or_404(request.team.members,
-                                   student_id=int(request.POST.get('member', -1)))
-        team = get_object_or_404(Team, user__username=request.POST.get('team'))
+        member = get_object_or_404(request.team.members, id=int(request.POST.get('member', -1)))
+        team = get_object_or_404(Team, id=int(request.POST.get('team', -1)))
         if team == request.team:
             return HttpResponseForbidden("You cannot like your own team")
 

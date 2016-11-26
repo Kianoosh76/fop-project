@@ -52,10 +52,6 @@ class Team(models.Model):
     def __str__(self):
         return "{}: {}".format(self.user.username, self.name)
 
-    @property
-    def username(self):
-        return self.user.username
-
 
 class Member(models.Model):
     name = models.CharField(max_length=40)
@@ -66,7 +62,7 @@ class Member(models.Model):
         return "{}: {}".format(self.student_id, self.name)
 
     def votes_list(self):
-        return [(vote.team.username, vote.valid) for vote in self.votes.all()]
+        return [(vote.team.id, vote.valid) for vote in self.votes.all()]
 
 
 class Vote(models.Model):
