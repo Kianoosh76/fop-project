@@ -9,14 +9,14 @@
 {% block content %}
     {% csrf_token %}
     <div class="container" style="background-color: white">
-        <h2 align="center">This is Fop Project!</h2>
+        <h2 align="center">This is Fondumentals of Programming Project!</h2>
         <div class="table-responsive">
             <table class="table table-striped table-hover" title="teams" style="text-align: center;">
                 <thead>
                 <tr>
                     <th>Team name</th>
-                    <th>Member1</th>
-                    <th>Member2</th>
+                    <th>Member 1</th>
+                    <th>Member 2</th>
 
                     <th>
                     {% if request.user.team %}
@@ -27,7 +27,7 @@
                             {% endfor %}
                         </select>
                     {% else %}
-                        Please login your team to like/dislike
+                        login to like
                     {% endif%}
                     </th>
                 </tr>
@@ -57,7 +57,7 @@
                             {% endfor %}
                         {% endwith %}
                         <td>
-                            <span class="glyphicon glyphicon-heart like" row="{{ forloop.counter }}"
+                            <span class="glyphicon glyphicon-heart like" id="{{ forloop.counter }}"
                                   style="color:red"></span>
                             <span id="votes-{{ forloop.counter }}" style="color:red">{{ team.votes }}</span>
                         </td>
@@ -69,4 +69,14 @@
                 Glyphicons by <a href="http://glyphicons.com/">Glyphicons</a>
             </footer>
         </div>
+    </div>
+    <span id="votes">
+    {% if request.user.team %}
+        {% for member in request.user.team.members.all %}
+            {% for team, valid in member.votes_list %}
+                <input id="vote-{{member.student_id}}-{{team}}" type="hidden" value="{{valid}}">
+            {% endfor %}
+        {% endfor %}
+    {% endif%}
+    </span>
 {% endblock %}

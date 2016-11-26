@@ -65,6 +65,9 @@ class Member(models.Model):
     def __str__(self):
         return "{}: {}".format(self.student_id, self.name)
 
+    def votes_list(self):
+        return [(vote.team.username, vote.valid) for vote in self.votes.all()]
+
 
 class Vote(models.Model):
     member = models.ForeignKey(to='Member', null=False, related_name='votes')
