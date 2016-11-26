@@ -1,9 +1,10 @@
 from django.http import HttpResponse
+from django.http.response import HttpResponseForbidden
 from django.views.generic.list import ListView
 from rest_framework.generics import get_object_or_404
 from rest_framework.views import APIView
 
-from helpers.permissions import TeamPermission, PermissionCheckerMixin, AjaxPermission
+from helpers.permissions import TeamPermission, AjaxPermission
 from teams.models import Team, Vote
 
 
@@ -29,6 +30,9 @@ class LikeView(APIView):
         member = get_object_or_404(request.team.members,
                                    student_id=int(request.POST.get('member', -1)))
         team = get_object_or_404(Team, user__username=request.POST.get('team'))
+        if team == request.team:
+            return HttpResponseForbidden("You cannot like your own team")
+
         vote, created = Vote.objects.get_or_create(member=member, team=team)
         if not created:
             vote.valid ^= 1

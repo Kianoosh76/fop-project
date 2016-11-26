@@ -12,7 +12,7 @@ $(document).ready(function(){
             success: function(data, status, xhttp){
                 $("#votes-" + row).html(data);
             },
-            error: function(result){
+            error: function(result, status, xhttp){
                 alert(result.responseText);
             }
         });
