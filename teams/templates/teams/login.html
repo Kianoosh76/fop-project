@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
 
-{% block title %}ورود{% endblock %}
 {% block content %}
     <style>
     body{
@@ -9,25 +8,24 @@
     }
     </style>
     <div class="jumbotron col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1 ajab" style="position: fixed; top:20%;padding-top: 20px;">
-        <h2>ورود به سایت</h2>
+        <h2>Welcome to FoP Project Website</h2>
         <br>
         <form method="post" class="form-horizontal">
             {% csrf_token %}
             {% if form.errors %}
                 <div class="alert alert-danger alert-dismissable fade in">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    نام تیم یا رمز عبور نادرست می باشد.
-                </div>
+Eiter team name or password is incorrect                </div>
             {% endif %}
             <div class="form-group">
-                <label class="control-label col-xs-4" for="id_username">نام تیم:</label>
+                <label class="control-label col-xs-4" for="id_username">Team name</label>
                 {{ form.username|add_class:'form-control col-sm-6 col-xs-7'  }}
             </div>
             <div class="form-group">
-                <label class="control-label col-xs-4" for="id_password">رمز عبور:</label>
+                <label class="control-label col-xs-4" for="id_password">Password</label>
                 {{ form.password|add_class:'form-control col-sm-6 col-xs-7' }}
             </div>
-            <button class="col-xs-offset-4 btn btn-primary" type="submit">ورود</button>
+            <button class="col-xs-offset-4 btn btn-primary" type="submit">Log me in!</button>
         </form>
     </div>
 {% endblock %}
