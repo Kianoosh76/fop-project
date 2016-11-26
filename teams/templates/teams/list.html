@@ -10,12 +10,14 @@
                     <th>Team name</th>
                     <th>Member1</th>
                     <th>Member2</th>
+                    <th>Votes</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for team in teams %}
                     <tr>
                         <td>{{ team.name }}</td>
+                    <input type="hidden" id="team-forloop.counter" value="team.username">
                         {% with team.members.count as count %}
                             {% for member in team.members.all %}
 
@@ -36,7 +38,7 @@
             {% endfor %}
             {% endwith %}
             <td>
-                <a href="#"><span class="glyphicon glyphicon-heart" id="like-forloop.counter"></span></a>
+                <a href="#"><span class="glyphicon glyphicon-user" id="like-forloop.counter"></span></a>
                 <span id="votes-forloop.counter">{{team.votes}}</span>
             </td>
         </tr>
