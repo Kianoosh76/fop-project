@@ -11,7 +11,23 @@
         {% for team in teams %}
         <tr>
             <td>{{team.name}}</td>
-            {% for member in team.members.all %} <td>{{member.name}}</td> {% endfor %}
+            {% with team.members.count as count %}
+            {% for member in team.members.all %}
+                {% if forloop.counter <= 2%}
+                    <td>
+                {% endif %}
+                {{member.name}}
+
+                {% if forloop.counter > 1 and forloop.counter < count %}
+                    <br>
+                {% endif %}
+
+                {% if forloop.counter == 1 or forloop.counter == count %}
+                    </td>
+                {% endif %}
+
+            {% endfor %}
+            {% endwith %}
         </tr>
         {% endfor %}
         </tbody>
