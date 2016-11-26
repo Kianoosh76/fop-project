@@ -57,12 +57,16 @@
                             {% endfor %}
                         {% endwith %}
                         <td>
-                            <span class="glyphicon glyphicon-heart like" row="{{forloop.counter}}" style="color:red"></span>
-                            <span id="votes-{{forloop.counter}}" style="color:red">{{team.votes}}</span>
+                            <span class="glyphicon glyphicon-heart like" row="{{ forloop.counter }}"
+                                  style="color:red"></span>
+                            <span id="votes-{{ forloop.counter }}" style="color:red">{{ team.votes }}</span>
                         </td>
                     </tr>
                 {% endfor %}
-        </tbody>
-    </table>
-    </div>
+                </tbody>
+            </table>
+            <footer align="center">
+                Glyphicons by <a href="http://glyphicons.com/">Glyphicons</a>
+            </footer>
+        </div>
 {% endblock %}
