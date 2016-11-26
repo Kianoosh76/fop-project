@@ -7,6 +7,18 @@
         <thead>
         <th>Team name</th>
         <th>Members</th>
+        <th>
+        {% if request.user.team %}
+            Who are you for voting?
+            <select>
+                {% for member in request.user.team.members.all %}
+                <option value="{{member.student_id}}">{{member.name}}</option>
+                {% endfor %}
+            </select>
+        {% else %}
+            Please login your team to like/dislike
+        {% endif%}
+        </th>
         </thead>
         <tbody>
         {% for team in teams %}
@@ -33,7 +45,7 @@
             {% endfor %}
             {% endwith %}
             <td>
-                <a href="#"><span class="glyphicon glyphicon-heart" id="like-forloop.counter"></span></a>
+                <a href="#"><span class="glyphicon glyphicon-heart" id="like-forloop.counter">Like</span></a>
                 <span id="votes-forloop.counter">{{team.votes}}</span>
             </td>
         </tr>
