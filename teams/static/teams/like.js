@@ -1,5 +1,5 @@
 $(document).load(function(){
-    $(".like").on("click", function(){
+    $(".like").click(function(){
         document.write("salam");
     });
 });
