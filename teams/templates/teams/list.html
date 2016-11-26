@@ -2,50 +2,43 @@
 
 {% block content %}
     <div class="container" style="background-color: white">
-    <h2>This is Fop Project!</h2>
-    <table title="teams">
-        <thead>
-        <th>Team name</th>
-        <th>Members</th>
-        <th>
-        {% if request.user.team %}
-            Who are you for voting?
-            <select>
-                {% for member in request.user.team.members.all %}
-                <option value="{{member.student_id}}">{{member.name}}</option>
-                {% endfor %}
-            </select>
-        {% else %}
-            Please login your team to like/dislike
-        {% endif%}
-        </th>
-        </thead>
-        <tbody>
-        {% for team in teams %}
-        <tr>
-            <td>{{team.name}}</td>
-            <input type="hidden" id="team-forloop.counter" value="team.username">
-            {% with team.members.count as count %}
-            {% for member in team.members.all %}
+        <h2 align="center">This is Fop Project!</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover" title="teams" style="text-align: center;">
+                <thead>
+                <tr>
+                    <th>Team name</th>
+                    <th>Member1</th>
+                    <th>Member2</th>
+                    <th>Votes</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for team in teams %}
+                    <tr>
+                        <td>{{ team.name }}</td>
+                    <input type="hidden" id="team-forloop.counter" value="team.username">
+                        {% with team.members.count as count %}
+                            {% for member in team.members.all %}
 
-                {% if forloop.counter <= 2 %}
-                    <td>
-                {% endif %}
+                                {% if forloop.counter <= 2 %}
+                                    <td>
+                                {% endif %}
 
-                {{member.name}}
+                            {{ member.name }}
 
-                {% if forloop.counter > 1 and forloop.counter < count %}
-                    <br>
-                {% endif %}
+                            {% if forloop.counter > 1 and forloop.counter < count %}
+                                <br>
+                            {% endif %}
 
-                {% if forloop.counter == 1 or forloop.counter == count %}
-                    </td>
-                {% endif %}
+                            {% if forloop.counter == 1 or forloop.counter == count %}
+                                </td>
+                            {% endif %}
 
             {% endfor %}
             {% endwith %}
             <td>
-                <a href="#"><span class="glyphicon glyphicon-heart" style="color:red" id="like-forloop.counter"></span>tmp like</a>
+                <a href="#"><span class="glyphicon glyphicon-heart" id="like-forloop.counter" style="color:red"></span></a>
                 <span id="votes-forloop.counter">{{team.votes}}</span>
             </td>
         </tr>
