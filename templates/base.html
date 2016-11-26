@@ -4,11 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static "bootstrap.min.css"%}">
-    <script src="{% static 'jquery.min.js' %}"></script>
-    <script src="{% static 'bootstrap.min.js'%}"></script>
-    <title>{% block title %}FoP Project
-    {% endblock %}</title>
+    {% block static %}
+        <link rel="stylesheet" href="{% static "bootstrap.min.css"%}">
+        <script src="{% static 'jquery.min.js' %}"></script>
+        <script src="{% static 'bootstrap.min.js'%}"></script>
+    {% endblock %}
+    <title>
+        {% block title %}FoP Project{% endblock %}
+    </title>
 </head>
 
 <style>

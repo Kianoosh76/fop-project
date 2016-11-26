@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block static %}
+    {{block.super}}
+    <script src="{% static 'teams/like.js' %}"></script>
+{% endblock %}
 
 {% block content %}
     <div class="container" style="background-color: white">
