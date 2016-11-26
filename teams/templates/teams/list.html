@@ -35,7 +35,7 @@
                 {% for team in teams %}
                     <tr>
                         <td>{{ team.name }}</td>
-                        <input type="hidden" id="team-forloop.counter" value="team.username">
+                        <input type="hidden" id="team-{{forloop.counter}}" value="{{team.username}}">
                         {% with team.members.count as count %}
                             {% for member in team.members.all %}
 
@@ -56,8 +56,8 @@
                             {% endfor %}
                         {% endwith %}
                         <td>
-                            <span class="glyphicon glyphicon-heart like" id="like-forloop.counter" style="color:red"></span>
-                            <span id="votes-forloop.counter">{{team.votes}}</span>
+                            <span class="glyphicon glyphicon-heart like" row="{{forloop.counter}}" style="color:red"></span>
+                            <span id="votes-{{forloop.counter}}">{{team.votes}}</span>
                         </td>
                     </tr>
                 {% endfor %}

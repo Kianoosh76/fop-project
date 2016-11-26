@@ -5,14 +5,15 @@ $(document).ready(function(){
             url: '/like',
             method: 'POST',
             data: {
-                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
-                'team': $("#"),
-                'member': $("#members:selected").val()
+                team: $("#team-" + row).val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                member: $("#members option:selected").val()
             },
             success: function(data, status, xhttp){
+                $("#votes-" + row).html(data);
             },
-            error: function(data, status, xhttp){
-                alert(data.responseText);
+            error: function(result){
+                alert(result.responseText);
             }
         });
     });
