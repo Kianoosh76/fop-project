@@ -11,6 +11,11 @@ class TeamPermission(BasePermission):
         return False
 
 
+class AjaxPermission(BasePermission):
+    def has_permission(self, request, view):
+        return request.is_ajax()
+
+
 class PermissionCheckerMixin:
     permission_classes = []
 
