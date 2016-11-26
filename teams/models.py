@@ -52,6 +52,10 @@ class Team(models.Model):
     def __str__(self):
         return "{}: {}".format(self.user.username, self.name)
 
+    @property
+    def username(self):
+        return self.user.username
+
 
 class Member(models.Model):
     name = models.CharField(max_length=40)
