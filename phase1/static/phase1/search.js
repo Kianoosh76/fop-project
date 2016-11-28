@@ -33,7 +33,7 @@ $(document).ready(function () {
                         categoriesList+='<button type="button" class="btn btn-warning category" id="category-'+i+'-'+j+'" val="'+news[i].categories[j].category+'">'+news[i].categories[j].category+'</button>&nbsp';
                     }
                     var appendingData =
-                        '<div class="panel panel-default" style="margin: 20px;">' +
+                        '<div class="panel panel-default " style="margin: 20px;">' +
                             '<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse'+i+'" >'+
                                 '<h4 class="panel-title">'+
                                     '<a>'+news[i].title+'</a>' +
