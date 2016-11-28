@@ -5,9 +5,10 @@ $(document).ready(function () {
             $("#search_button").click();
         }
     });
-    $(".category").click(function(){
-        var val=$(this).attr('id');
-        console.log(val);
+    $(document).on('click','.category',function(){
+        var val=$(this).attr('val');
+        $("#search").val(val);
+        $("#search_button").trigger('click');
     });
     $("#search_button").click(function(){
         var text=$("#search").val();
