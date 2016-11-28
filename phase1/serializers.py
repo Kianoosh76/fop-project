@@ -6,6 +6,7 @@ from phase1.models import Category, News
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model=Category
+        fields='__all__'
 
 class NewsSerializer(serializers.ModelSerializer):
     categories = CategorySerializer(many=True)
