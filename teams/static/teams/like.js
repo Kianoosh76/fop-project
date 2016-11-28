@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
     set_votes_color();
-
     function get_member(){
         return $("#members option:selected").val();
     }
