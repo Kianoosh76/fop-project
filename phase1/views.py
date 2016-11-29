@@ -23,7 +23,12 @@ class NewsView(TemplateView,APIView):
     template_name = 'phase1/news.html'
     def post(self,request,*args,**kwargs):
         text=request.POST.get('text')
-        news=get_object_or_404(Category.objects.all(), category=text).news.filter(team=request.team)
+        isCat = request.POST.get('isCat')
+        if(isCat == 'false'):
+            isCat = False
+        else:
+            isCat =True
+        news=get_object_or_404(Category.objects.all(), category=text).news.filter(categorized = isCat).filter(team=request.team)
         x = NewsSerializer(news, many=True)
         return Response(x.data)
 

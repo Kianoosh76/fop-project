@@ -5,18 +5,24 @@ $(document).ready(function () {
             $("#search_button").click();
         }
     });
+    $("#categorized").change(function(){
+        $("#search_button").click();
+    })
     $(document).on('click','.category',function(){
         var val=$(this).attr('val');
         $("#search").val(val);
-        $("#search_button").trigger('click');
+        $("#search_button").click();
     });
     $("#search_button").click(function(){
         var text=$("#search").val();
+        var isCat = $("#categorized").prop('checked');
+        console.log(isCat);
         $.ajax({
             url:'/news',
             method:'POST',
             data:{
                 text: text,
+                isCat: isCat,
                 csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
             },
             success: function(data, status, xhttp) {
