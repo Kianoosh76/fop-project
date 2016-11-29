@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from helpers.permissions import TeamPermission, PermissionCheckerMixin, AjaxPermission
-from phase1.models import Category
+from phase1.models import Category, Config
 from phase1.serializers import NewsSerializer
 
 
@@ -47,3 +47,10 @@ class NewsView(ListCreateAPIView):
         instance = serializer.save()
 
         instance.categories = category_objects
+
+    def create(self, request, *args, **kwargs):
+        ret = super().create(request, *args, **kwargs)
+        news = request.team.news
+        if news.count() > Config.get_solo().max_news_count_per_team:
+            news.first().delete()
+        return ret

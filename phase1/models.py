@@ -15,7 +15,7 @@ class Category(models.Model):
 class News(models.Model):
     title = models.CharField(max_length=300)
     date = models.CharField(max_length=40)
-    description = models.TextField(max_length=2000)
+    description = models.CharField(max_length=2000)
     categorized = models.BooleanField()
     categories = models.ManyToManyField(to='Category', related_name='news', blank=True)
     team = models.ForeignKey(to='teams.Team', related_name='news')
@@ -54,5 +54,9 @@ class Config(SingletonModel):
                                                  verbose_name='Number of uncategorized '
                                                               '(phase 3) urls for each team')
 
+    max_news_count_per_team = models.IntegerField(default=500,
+                                                  verbose_name='Maximum number of news for each'
+                                                               'team')
+
     def __str__(self):
-        return 'URLs configurations'
+        return 'URL and news configurations'

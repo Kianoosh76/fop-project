@@ -35,7 +35,7 @@ $(document).ready(function () {
                     var categoriesList='';
                     for(var j=0;j<news[i].categories.length;j++)
                     {
-                        categoriesList+='<button type="button" class="btn btn-warning category" id="category-'+i+'-'+j+'" val="'+news[i].categories[j].category+'">'+news[i].categories[j].category+'</button>&nbsp';
+                        categoriesList+='<button type="button" class="btn btn-warning category" style="margin-bottom: 10px" id="category-'+i+'-'+j+'" val="'+news[i].categories[j].category+'">'+news[i].categories[j].category+'</button>&nbsp';
                     }
                     var appendingData =
                         '<div class="panel panel-default " style="margin: 20px;">' +
