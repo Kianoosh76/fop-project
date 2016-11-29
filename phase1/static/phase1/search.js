@@ -19,11 +19,10 @@ $(document).ready(function () {
         console.log(isCat);
         $.ajax({
             url:'/news',
-            method:'POST',
+            method:'GET',
             data:{
-                text: text,
+                category: text,
                 isCat: isCat,
-                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
             },
             success: function(data, status, xhttp) {
                 console.log(data);

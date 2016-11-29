@@ -1,10 +1,11 @@
 from django.http.response import HttpResponse, Http404, HttpResponseForbidden
 from django.views.generic import TemplateView
-from rest_framework.generics import get_object_or_404
+from rest_framework.generics import get_object_or_404, GenericAPIView, ListCreateAPIView
+from rest_framework.mixins import ListModelMixin
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from helpers.permissions import TeamPermission
+from helpers.permissions import TeamPermission, PermissionCheckerMixin, AjaxPermission
 from phase1.models import Category
 from phase1.serializers import NewsSerializer
 
@@ -18,18 +19,31 @@ class GetURLsView(APIView):
             property = 'uncategorized_urls'
         return HttpResponse(" ".join([str(url) for url in getattr(request.team, property).all()]))
 
-class NewsView(TemplateView,APIView):
+
+class SearchView(PermissionCheckerMixin, TemplateView):
     permission_classes = [TeamPermission]
     template_name = 'phase1/news.html'
-    def post(self,request,*args,**kwargs):
-        text=request.POST.get('text')
-        isCat = request.POST.get('isCat')
-        if(isCat == 'false'):
-            isCat = False
-        else:
-            isCat =True
-        news=get_object_or_404(Category.objects.all(), category=text).news.filter(categorized = isCat).filter(team=request.team)
-        x = NewsSerializer(news, many=True)
-        return Response(x.data)
 
 
+class NewsView(ListCreateAPIView):
+    permission_classes = [AjaxPermission, TeamPermission]
+    serializer_class = NewsSerializer
+
+    def get_queryset(self):
+        return self.request.team.news
+
+    def filter_queryset(self, queryset):
+        category = self.request.query_params.get('category').lower()
+        is_cat = self.request.query_params.get('isCat')
+        return queryset.filter(categorized=is_cat != 'false', categories__category__in=[category])
+
+    def perform_create(self, serializer):
+        categories = self.request.data.get('categories')
+        category_objects = []
+        for category in categories:
+            category_object, _ = Category.objects.get_or_create(category=category.lower())
+            category_objects.append(category_object)
+
+        instance = serializer.save()
+
+        instance.categories = category_objects
