@@ -11,14 +11,19 @@
 {% block content %}
     <div class="container">
     {% csrf_token %}
-        <div class="input-group col-sm-offset-4 col-sm-4 col-xs-offset-2 col-xs-8" style="margin-top: 10px;margin-bottom: 30px;">
-            <input id="search" type="text" class="form-control" name="search" placeholder="Search">
-            <span class="input-group-btn">
-                <button class="btn btn-secondary" type="button" id="search_button">
-                    <i class="glyphicon glyphicon-search"></i>
-                </button>
-            </span>
-        </div>
+
+            <div class="input-group col-sm-offset-4 col-sm-4 col-xs-offset-2 col-xs-8" style="margin-top: 10px;margin-bottom: 10px;">
+                <input id="search" type="text" class="form-control" name="search" placeholder="Search">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button" id="search_button">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </span>
+            </div>
+            <div class="checkbox col-xs-offset-4 col-xs-2" style="margin-bottom: 30px">
+                <label style = "color: whitesmoke "><input type="checkbox" value="">Categorized</label>
+            </div>
+
         <div class="panel-group col-sm-offset-2 col-sm-8" id="accordion">
         </div>
     </div>
