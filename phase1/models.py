@@ -59,6 +59,3 @@ class Config(SingletonModel):
                                                                'team')
 
     background_color = ColorField(default='#3d5050', verbose_name='Background color')
-
-    def __str__(self):
-        return 'Site configurations'
