@@ -17,10 +17,12 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 from phase0.views import Phase0View
+from phase1.views import SearchView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^phase0/', Phase0View.as_view(), name='phase0'),
+    url(r'^search/$', SearchView.as_view(), name='search'),
     url(r'^news/', include('phase1.urls'), name='phase1'),
     url(r'^', include('teams.urls', namespace='team'))
 ]
