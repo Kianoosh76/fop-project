@@ -19,7 +19,6 @@ class NewsInline(admin.TabularInline):
 
 
 class TeamAdmin(admin.ModelAdmin):
-    model = Team
     inlines = [MemberInline, NewsInline]
     list_display = ['__str__', 'votes']
     actions = ['generate_password', 'add_text', 'assign_categorized_urls',

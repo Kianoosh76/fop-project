@@ -5,6 +5,7 @@ from rest_framework.mixins import ListModelMixin
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from helpers.background_color import BackgroundColorMixin
 from helpers.permissions import TeamPermission, PermissionCheckerMixin, AjaxPermission
 from phase1.models import Category, Config
 from phase1.serializers import NewsSerializer
@@ -20,7 +21,7 @@ class GetURLsView(APIView):
         return HttpResponse(" ".join([str(url) for url in getattr(request.team, property).all()]))
 
 
-class SearchView(PermissionCheckerMixin, TemplateView):
+class SearchView(PermissionCheckerMixin, BackgroundColorMixin, TemplateView):
     permission_classes = [TeamPermission]
     template_name = 'phase1/news.html'
 

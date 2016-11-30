@@ -1,9 +1,11 @@
+from django.contrib.auth import views as auth_views
 from django.http import HttpResponse
 from django.http.response import HttpResponseForbidden
 from django.views.generic.list import ListView
 from rest_framework.generics import get_object_or_404
 from rest_framework.views import APIView
 
+from helpers.background_color import BackgroundColorMixin
 from helpers.permissions import TeamPermission, AjaxPermission
 from teams.models import Team, Vote
 
@@ -17,7 +19,7 @@ class WelcomeView(APIView):
         ))
 
 
-class TeamsList(ListView):
+class TeamsList(BackgroundColorMixin, ListView):
     model = Team
     template_name = 'teams/list.html'
     context_object_name = 'teams'
@@ -38,3 +40,8 @@ class LikeView(APIView):
             vote.save()
         team.refresh_from_db()
         return HttpResponse(team.votes)
+
+
+def login_view(request, **kwargs):
+    kwargs['extra_context'] = {'background_color': BackgroundColorMixin.get_color()}
+    return auth_views.login(request, **kwargs)

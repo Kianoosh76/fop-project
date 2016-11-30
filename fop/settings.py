@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'widget_tweaks',
+    'colorfield',
+    'solo',
     'teams',
     'phase0',
     'phase1',

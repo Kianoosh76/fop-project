@@ -1,3 +1,4 @@
+from colorfield.fields import ColorField
 from django.db import models
 from solo.models import SingletonModel
 
@@ -53,10 +54,11 @@ class Config(SingletonModel):
     uncategorized_urls_num = models.IntegerField(default=10,
                                                  verbose_name='Number of uncategorized '
                                                               '(phase 3) urls for each team')
-
     max_news_count_per_team = models.IntegerField(default=500,
-                                                  verbose_name='Maximum number of news for each'
+                                                  verbose_name='Maximum number of news for each '
                                                                'team')
 
+    background_color = ColorField(default='#3d5050', verbose_name='Background color')
+
     def __str__(self):
-        return 'URL and news configurations'
+        return 'Site configurations'

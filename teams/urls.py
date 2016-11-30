@@ -2,13 +2,12 @@ from django.conf import settings
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
-from django.contrib.auth.forms import AdminPasswordChangeForm
 
-from teams.views import WelcomeView, TeamsList, LikeView
+from teams.views import WelcomeView, TeamsList, LikeView, login_view
 
 urlpatterns= [
     url(r'^welcome/$', WelcomeView.as_view(), name='welcome'),
-    url(r'^login/$', auth_views.login,{'template_name': 'teams/login.html'}, name="login"),
+    url(r'^login/$', login_view, {'template_name': 'teams/login.html'}, name="login"),
     url(r'^logout/$', auth_views.logout,{'next_page': '/login/'}, name='logout'),
     url(r'^like/$', LikeView.as_view(), name='like'),
     url(r'^$', TeamsList.as_view(), name='list'),
