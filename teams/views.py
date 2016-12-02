@@ -23,6 +23,7 @@ class TeamsList(BackgroundColorMixin, ListView):
     model = Team
     template_name = 'teams/list.html'
     context_object_name = 'teams'
+    ordering = '-votes'
 
 
 class LikeView(APIView):
