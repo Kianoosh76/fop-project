@@ -46,6 +46,7 @@ def login_view(request, **kwargs):
     kwargs['extra_context'] = {'background_color': BackgroundColorMixin.get_color()}
     return auth_views.login(request, **kwargs)
 
+
 def password_change_view(request, **kwargs):
     kwargs['extra_context'] = {'background_color': BackgroundColorMixin.get_color()}
     return auth_views.password_change(request, **kwargs)

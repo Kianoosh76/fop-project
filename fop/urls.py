@@ -13,8 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf.urls.static import static
 
 from phase0.views import Phase0View
 from phase1.views import SearchView
@@ -25,4 +27,4 @@ urlpatterns = [
     url(r'^search/$', SearchView.as_view(), name='search'),
     url(r'^news/', include('phase1.urls'), name='phase1'),
     url(r'^', include('teams.urls', namespace='team'))
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

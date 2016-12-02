@@ -1,4 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponse, Http404, HttpResponseForbidden
+from django.urls import reverse
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from rest_framework.generics import get_object_or_404, GenericAPIView, ListCreateAPIView
 from rest_framework.mixins import ListModelMixin
@@ -24,6 +27,10 @@ class GetURLsView(APIView):
 class SearchView(PermissionCheckerMixin, BackgroundColorMixin, TemplateView):
     permission_classes = [TeamPermission]
     template_name = 'phase1/news.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
 
 class NewsView(ListCreateAPIView):

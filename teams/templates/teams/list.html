@@ -27,7 +27,7 @@
                             {% endfor %}
                         </select>
                     {% else %}
-                        <a href="/login">login</a> to like
+                        <a href="{% url 'team:login' %}"><button>login</button></a> to like
                     {% endif%}
                     </th>
                 </tr>
