@@ -37,7 +37,7 @@
                             {% endfor %}
                         </select>
                     {% else %}
-                        <a href="{% url 'team:login' %}"><button class="btn btn-info">login</button></a> to like
+                        <a href="{% url 'team:login' %}"><button class="btn btn-info">login to like</button></a>
                     {% endif%}
                     </th>
                 </tr>
@@ -45,7 +45,9 @@
                 <tbody>
                 {% for team in teams %}
                     <tr>
-                        <td><strong>{{ team.name }}</strong></td>
+                        <td><strong>{{ team.name }}</strong>{% if request.user.team == team %}
+                            <span class="label label-success">Your team!</span>
+                        {% endif %}</td>
                         <input type="hidden" id="team-{{forloop.counter}}" value="{{team.id}}">
                         {% with team.members.count as count %}
                             {% for member in team.members.all %}

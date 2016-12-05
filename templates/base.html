@@ -39,8 +39,8 @@
                     <li {% block search_active %}{% endblock %}><a href="{% url 'search' %}">Search</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li{% block password_change_active %}{% endblock %}><a href="{% url 'team:password_change' %}">Change Password</a></li>
-                    <a href="{% url 'team:logout' %}"><button class="btn btn-danger navbar-btn"><span class="glyphicon glyphicon-log-out"></span> Logout</button></a>
+                    <li {% block password_change_active %}{% endblock %}><a href="{% url 'team:password_change' %}">Change Password</a></li>
+                    <li><a href="{% url 'team:logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                 </ul>
             </div>
         </div>
