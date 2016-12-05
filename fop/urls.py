@@ -25,6 +25,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^phase0/', Phase0View.as_view(), name='phase0'),
     url(r'^search/$', SearchView.as_view(), name='search'),
-    url(r'^news/', include('phase1.urls'), name='phase1'),
+    url(r'^news/', include('phase1.urls',namespace='phase1'), name='phase1'),
     url(r'^', include('teams.urls', namespace='team'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

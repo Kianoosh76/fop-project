@@ -8,7 +8,7 @@ urlpatterns = [
     url(r'^login/$', login_view, {'template_name': 'teams/login.html'}, name="login"),
     url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^password_change/$', password_change_view,
-        {'template_name': 'teams/change_password.html', 'post_change_redirect': '/'}),
+        {'template_name': 'teams/change_password.html', 'post_change_redirect': '/'},name='password_change'),
     url(r'^like/$', LikeView.as_view(), name='like'),
     url(r'^$', TeamsList.as_view(), name='list'),
 ]

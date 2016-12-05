@@ -6,6 +6,16 @@
     <script src="{% static 'teams/like.js' %}"></script>
 {% endblock %}
 
+{% block navbar %}
+    {% if request.user.team %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}
+
+{% block teams_active %}
+    class="active"
+{% endblock %}
+
 {% block content %}
     {% csrf_token %}
     <div class="container" style="background-color: white">
@@ -27,7 +37,7 @@
                             {% endfor %}
                         </select>
                     {% else %}
-                        <a href="{% url 'team:login' %}"><button>login</button></a> to like
+                        <a href="{% url 'team:login' %}"><button class="btn btn-info">login</button></a> to like
                     {% endif%}
                     </th>
                 </tr>
