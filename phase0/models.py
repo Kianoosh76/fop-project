@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Text(models.Model):
-    text = models.TextField(max_length=10000)
+    text = models.TextField()
     smallest_repeated_word = models.CharField(max_length=40)
     distinct_longest_words = models.IntegerField()
 

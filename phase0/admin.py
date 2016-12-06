@@ -12,7 +12,7 @@ class TeamsInline(admin.StackedInline):
 
 class TextAdmin(admin.ModelAdmin):
     readonly_fields = ['smallest_repeated_word', 'distinct_longest_words']
-    list_display = ['text', 'smallest_repeated_word', 'distinct_longest_words']
+    list_display = ['__str__', 'smallest_repeated_word', 'distinct_longest_words']
     inlines = [TeamsInline]
 
 admin.site.register(Text, TextAdmin)
