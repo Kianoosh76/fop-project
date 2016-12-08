@@ -27,7 +27,7 @@ SECRET_KEY = 'h&a3%6eyxjn8*8ga@m862j*ld)s0^2dw)h9wq0kcpnvl!w1afn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['46.101.97.202', 'fop-project.ir']
 
 
 # Application definition
@@ -134,3 +134,4 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')

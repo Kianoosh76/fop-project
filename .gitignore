@@ -101,3 +101,6 @@ cities/fixtures/****
 # Migrations
 **/migrations/**
 !**/migrations/__init__.py
+
+# Apache2
+fop/apache/
