@@ -27,7 +27,7 @@ SECRET_KEY = 'h&a3%6eyxjn8*8ga@m862j*ld)s0^2dw)h9wq0kcpnvl!w1afn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['46.101.97.202', 'fop-project.ir' ,'localhost']
+ALLOWED_HOSTS = ['46.101.97.202', 'fop-project.ir', 'localhost', '127.0.0.1']
 
 
 # Application definition

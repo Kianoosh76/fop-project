@@ -47,22 +47,20 @@ $(document).ready(function(){
                 member: member
             },
             success: function(data, status, xhttp){
-                $("#votes-" + row).html(data);
+                var valid = data['valid'] ? 'True' : 'False';
+                $("#votes-" + row).html(data['votes']);
                 var vote = get_vote(member, team);
                 if (vote.length){
-                    if (vote.val() == 'True')
-                        vote.attr('value', 'False');
-                    else
-                        vote.attr('value', 'True');
+                    vote.attr('value', valid);
                 }
                 else{
-                    $("#votes").append($('<input>').attr('type', 'hidden').attr('id', 'vote-'+member+'-'+team).attr('value', 'True'));
+                    $("#votes").append($('<input>').attr('type', 'hidden').attr('id', 'vote-'+member+'-'+team).attr('value', valid));
                 }
 
                 set_vote_color(row);
             },
             error: function(result, status, xhttp){
-                alert(result.responseText);
+                alert(result.responseJSON["detail"]);
             }
         });
     });

@@ -2,7 +2,9 @@ from django.contrib.auth import views as auth_views
 from django.http import HttpResponse
 from django.http.response import HttpResponseForbidden
 from django.views.generic.list import ListView
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import get_object_or_404
+from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from helpers.background_color import BackgroundColorMixin
@@ -33,14 +35,15 @@ class LikeView(APIView):
         member = get_object_or_404(request.team.members, id=int(request.POST.get('member', -1)))
         team = get_object_or_404(Team, id=int(request.POST.get('team', -1)))
         if team == request.team:
-            return HttpResponseForbidden("You cannot like your own team")
+            raise PermissionDenied("You cannot like your own team")
 
         vote, created = Vote.objects.get_or_create(member=member, team=team)
         if not created:
             vote.valid ^= 1
             vote.save()
         team.refresh_from_db()
-        return HttpResponse(team.votes)
+        vote.refresh_from_db()
+        return Response({'votes': team.votes, 'valid': vote.valid})
 
 
 def login_view(request, **kwargs):
