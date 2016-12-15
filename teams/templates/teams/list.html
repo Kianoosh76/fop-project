@@ -24,6 +24,7 @@
             <table class="table table-striped table-hover" title="teams" style="text-align: center;">
                 <thead>
                 <tr>
+                    <th>#</th>
                     <th>Team name</th>
                     <th>Member 1</th>
                     <th>Member 2</th>
@@ -45,6 +46,7 @@
                 <tbody>
                 {% for team in teams %}
                     <tr>
+                        <td>{{forloop.counter}}</td>
                         <td><strong>{{ team.name }}</strong>{% if request.user.team == team %}
                             <span class="label label-success">Your team!</span>
                         {% endif %}</td>
