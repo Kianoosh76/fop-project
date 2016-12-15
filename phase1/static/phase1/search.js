@@ -32,7 +32,7 @@ $(document).ready(function () {
                 newsDiv.empty();
                 if (news.length == 0){
                     var appendingData = '<div class="alert alert-danger">' +
-                                        '<strong> There are not any news with this category </strong> ' +
+                                        '<strong> There is not any news with this category </strong> ' +
                                         '</div>'
                     newsDiv.append(appendingData)
                 }
