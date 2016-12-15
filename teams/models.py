@@ -37,7 +37,7 @@ class Team(models.Model):
             self.text = Text.objects.all()[randint(0, texts - 1)]
 
     def save(self, *args, **kwargs):
-        if self.id is None and self.user is None:
+        if self.id is None:
             count = 0
             last_team = Team.objects.last()
             if last_team:
