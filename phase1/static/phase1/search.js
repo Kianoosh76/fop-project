@@ -30,6 +30,12 @@ $(document).ready(function () {
                // console.log(news.length);
                 newsDiv = $('#accordion');
                 newsDiv.empty();
+                if (news.length == 0){
+                    var appendingData = '<div class="alert alert-danger">' +
+                                        '<strong> There is not any news with this category </strong> ' +
+                                        '</div>'
+                    newsDiv.append(appendingData)
+                }
                 for(var i=0;i<news.length;i++)
                 {
                     var categoriesList='';
