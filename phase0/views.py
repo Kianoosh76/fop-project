@@ -8,7 +8,7 @@ class Phase0View(APIView):
     permission_classes = [TeamPermission]
 
     def get(self, request, *args, **kwargs):
-        return HttpResponse(request.team.text)
+        return HttpResponse(request.team.text.text)
 
     def post(self, request, *args, **kwargs):
         answer = request.data.get('answer')
