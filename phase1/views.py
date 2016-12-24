@@ -10,7 +10,7 @@ from rest_framework.views import APIView
 
 from helpers.background_color import BackgroundColorMixin
 from helpers.permissions import TeamPermission, PermissionCheckerMixin, AjaxPermission
-from phase1.models import Category, Config
+from phase1.models import Category, Config, CategorizedURL
 from phase1.serializers import NewsSerializer
 
 
@@ -18,6 +18,8 @@ class GetURLsView(APIView):
     permission_classes = [TeamPermission]
 
     def get(self, request, *args, **kwargs):
+        if request.query_params.get('phase') == '2':
+            return HttpResponse(" ".join([str(url) for url in CategorizedURL.objects.all()]))
         property = 'categorized_urls'
         if request.query_params.get('phase') == '3':
             property = 'uncategorized_urls'
