@@ -47,6 +47,10 @@ class UncategorizedURL(URL):
     pass
 
 
+class LearningURL(URL):
+    pass
+
+
 class Config(SingletonModel):
     categorized_urls_num = models.IntegerField(default=10,
                                                verbose_name='Number of categorized '
