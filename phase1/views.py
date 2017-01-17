@@ -60,7 +60,12 @@ class NewsView(ListCreateAPIView):
 
     def create(self, request, *args, **kwargs):
         ret = super().create(request, *args, **kwargs)
-        news = request.team.news
-        if news.count() > Config.get_solo().max_news_count_per_team:
+        categorized = request.data.get('categorized', False)
+        news = request.team.news.filter(categorized=categorized)
+        if categorized:
+            max_news = Config.get_solo().max_categorized_news_count_per_team
+        else:
+            max_news = Config.get_solo().max_uncategorized_news_count_per_team
+        if news.count() > max_news:
             news.first().delete()
         return ret

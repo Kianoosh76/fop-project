@@ -58,8 +58,11 @@ class Config(SingletonModel):
     uncategorized_urls_num = models.IntegerField(default=10,
                                                  verbose_name='Number of uncategorized '
                                                               '(phase 3) urls for each team')
-    max_news_count_per_team = models.IntegerField(default=500,
-                                                  verbose_name='Maximum number of news for each '
-                                                               'team')
-
+    max_categorized_news_count_per_team = models.IntegerField(default=200,
+                                                  verbose_name='Maximum number of categorized '
+                                                               'news for each team')
+    max_uncategorized_news_count_per_team = models.IntegerField(default=50,
+                                                                verbose_name="Maximum number of "
+                                                                             "uncategorized "
+                                                                             "news for each team")
     background_color = ColorField(default='#3d5050', verbose_name='Background color')
