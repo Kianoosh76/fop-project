@@ -16,7 +16,7 @@ class Category(models.Model):
 class News(models.Model):
     title = models.CharField(max_length=300)
     date = models.CharField(max_length=40)
-    description = models.CharField(max_length=2000)
+    description = models.CharField(max_length=10000)
     categorized = models.BooleanField()
     categories = models.ManyToManyField(to='Category', related_name='news', blank=True)
     team = models.ForeignKey(to='teams.Team', related_name='news')
