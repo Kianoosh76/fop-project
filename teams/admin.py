@@ -15,7 +15,7 @@ class NewsInline(admin.TabularInline):
     model = News
     extra = 0
     exclude = ['categories']
-    readonly_fields = ['all_categories']
+    readonly_fields = ['title', 'date', 'description', 'categorized', 'all_categories']
 
 
 class TeamAdmin(admin.ModelAdmin):
