@@ -15,6 +15,7 @@ class Team(models.Model):
                              on_delete=SET_NULL)
     categorized_urls = models.ManyToManyField(to='phase1.CategorizedURL', related_name='teams')
     uncategorized_urls = models.ManyToManyField(to='phase1.UnCategorizedURL', related_name='teams')
+    onsite_presentation = models.BooleanField(default=False)
 
     def generate_password(self):
         return "_".join([str(member.student_id) for member in self.members.all()])
